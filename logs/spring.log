@@ -1,0 +1,31 @@
+2024-09-27T00:41:38.806+02:00  INFO 7096 --- [Metamorph] [main] com.metamorph.MetamorphApplication       : Starting MetamorphApplication using Java 17.0.11 with PID 7096 (F:\My Repos\8. New Api\Metamorph\build\classes\java\main started by DellW in F:\My Repos\8. New Api\Metamorph)
+2024-09-27T00:41:38.808+02:00  INFO 7096 --- [Metamorph] [main] com.metamorph.MetamorphApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-09-27T00:41:39.564+02:00  INFO 7096 --- [Metamorph] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-27T00:41:39.621+02:00  INFO 7096 --- [Metamorph] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interface.
+2024-09-27T00:41:40.266+02:00  INFO 7096 --- [Metamorph] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2024-09-27T00:41:40.282+02:00  INFO 7096 --- [Metamorph] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-27T00:41:40.282+02:00  INFO 7096 --- [Metamorph] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-09-27T00:41:40.355+02:00  INFO 7096 --- [Metamorph] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-27T00:41:40.356+02:00  INFO 7096 --- [Metamorph] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1502 ms
+2024-09-27T00:41:40.402+02:00  INFO 7096 --- [Metamorph] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-27T00:41:40.617+02:00  INFO 7096 --- [Metamorph] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:metamorph-db user=SA
+2024-09-27T00:41:40.619+02:00  INFO 7096 --- [Metamorph] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-27T00:41:40.631+02:00  INFO 7096 --- [Metamorph] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:metamorph-db'
+2024-09-27T00:41:40.783+02:00  INFO 7096 --- [Metamorph] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-27T00:41:40.871+02:00  INFO 7096 --- [Metamorph] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-09-27T00:41:40.929+02:00  INFO 7096 --- [Metamorph] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-27T00:41:41.316+02:00  INFO 7096 --- [Metamorph] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-27T00:41:41.377+02:00  WARN 7096 --- [Metamorph] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-09-27T00:41:42.311+02:00  INFO 7096 --- [Metamorph] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-27T00:41:42.352+02:00  INFO 7096 --- [Metamorph] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-27T00:41:42.666+02:00  WARN 7096 --- [Metamorph] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-27T00:41:43.053+02:00  WARN 7096 --- [Metamorph] [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-09-27T00:41:43.500+02:00  INFO 7096 --- [Metamorph] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2024-09-27T00:41:43.510+02:00  INFO 7096 --- [Metamorph] [main] com.metamorph.MetamorphApplication       : Started MetamorphApplication in 5.151 seconds (process running for 5.861)
+2024-09-27T00:41:49.793+02:00  INFO 7096 --- [Metamorph] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-27T00:41:49.794+02:00  INFO 7096 --- [Metamorph] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-27T00:41:49.795+02:00  INFO 7096 --- [Metamorph] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-09-27T00:41:49.829+02:00  INFO 7096 --- [Metamorph] [http-nio-8081-exec-1] c.m.file.controller.FileController       : File created azizam
+2024-09-27T00:42:32.974+02:00  INFO 7096 --- [Metamorph] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-27T00:42:32.978+02:00  INFO 7096 --- [Metamorph] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-27T00:42:32.981+02:00  INFO 7096 --- [Metamorph] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -1,0 +1,26 @@
+services:
+  keycloak:
+    build:
+      context: .
+      dockerfile: Dockerfile-keycloak  # Name Ihrer Dockerfile für Keycloak
+    container_name: metamorph-keycloak-container-v1.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./import:/opt/keycloak/data/import
+    environment:
+      - KC_HEALTH_ENABLED=true
+      - KC_METRICS_ENABLED=true
+      - KEYCLOAK_ADMIN=mahdiyar
+      - KEYCLOAK_ADMIN_PASSWORD=mahdiyar
+    command: start-dev --import-realm
+
+  metamorph:
+    build:
+      context: .
+      dockerfile: Dockerfile-metamorph  # Name Ihrer Dockerfile für die Anwendung
+    container_name: metamorph-app-container
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/realms/metamorph-dev/protocol/openid-connect/certs

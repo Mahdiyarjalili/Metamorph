@@ -1,0 +1,26 @@
+{
+  "realm" : "master",
+  "users" : [ {
+    "id" : "12d04a90-84e6-4f42-9bd8-1477e21db665",
+    "username" : "mahdiyar",
+    "emailVerified" : false,
+    "createdTimestamp" : 1727038727803,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "e78892c9-ede4-438f-acf8-b5c5396b768d",
+      "type" : "password",
+      "createdDate" : 1727038727945,
+      "secretData" : "{\"value\":\"Y0XwLHMvo0AYFBaMUWiK6Fk9yBgGZAl/v7kRWMLGgWE=\",\"salt\":\"tLkV+8A6VZc7k0UbKoqyHA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-master", "admin" ],
+    "clientRoles" : {
+      "metamorph-dev-realm" : [ "manage-identity-providers", "view-events", "query-users", "view-realm", "view-authorization", "manage-realm", "view-identity-providers", "manage-events", "query-clients", "create-client", "view-users", "query-groups", "view-clients", "manage-users", "manage-authorization", "manage-clients", "query-realms" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}
