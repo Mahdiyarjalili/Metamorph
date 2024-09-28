@@ -1,6 +1,6 @@
 package com.metamorph.file.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,10 +11,12 @@ public class FileResponse {
   private long id;
   private String name;
   private String type;
-  private String extention;
-  private LocalDateTime created;
-  private LocalDateTime modified;
-  private LocalDateTime deleted;
+  private String extension;
+  private LocalDate created;
+  private LocalDate modified;
+  private LocalDate deleted;
   private boolean isActive;
+  private byte[] data;
+
 
 }
