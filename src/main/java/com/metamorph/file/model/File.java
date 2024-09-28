@@ -1,7 +1,7 @@
 package com.metamorph.file.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.*;
 
 @Entity
@@ -22,20 +22,24 @@ public class File {
   @Column(name = "file_type", nullable = false)
   private String type;
 
-  @Column(name = "file_extention", nullable = false)
-  private String extention;
+  @Column(name = "file_extension", nullable = false)
+  private String extension;
 
   @Column(name = "created_date", nullable = false)
-  private LocalDateTime created;
+  private LocalDate created;
 
-  @Column(name = "modified_date", nullable = false)
-  private LocalDateTime modified;
+  @Column(name = "modified_date")
+  private LocalDate modified;
 
-  @Column(name = "deleted_date", nullable = false)
-  private LocalDateTime deleted;
+  @Column(name = "deleted_date")
+  private LocalDate deleted;
 
   @Column(name = "is_active", nullable = false)
   private boolean isActive;
+
+  @Lob
+  @Column(name = "data", nullable = false)
+  private byte[] data;
 
   @Column(name = "user_id", nullable = false)
   private String userId;

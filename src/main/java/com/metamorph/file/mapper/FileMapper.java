@@ -4,8 +4,12 @@ import com.metamorph.file.dto.FileCreateRequest;
 import com.metamorph.file.dto.FileResponse;
 import com.metamorph.file.model.File;
 import com.metamorph.file.repository.FileRepository;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileMapper {
@@ -16,16 +20,18 @@ public class FileMapper {
     this.fileRepository = fileRepository;
   }
 
-  public File mapRequestToEntity(FileCreateRequest fileCreateRequest, String userId) {
+  public File mapToEntity(MultipartFile file,String type, String extension, String userId)
+      throws IOException {
 
     return File.builder()
-        .name(fileCreateRequest.getName())
-        .type(fileCreateRequest.getType())
-        .extention(fileCreateRequest.getExtention())
-        .created(fileCreateRequest.getCreated())
-        .modified(fileCreateRequest.getModified())
-        .deleted(fileCreateRequest.getDeleted())
-        .isActive(fileCreateRequest.isActive())
+        .name(file.getName())
+        .type(type)
+        .extension(extension)
+        .created(LocalDate.now())
+        .modified(null)
+        .deleted(null)
+        .isActive(true)
+        .data(file.getBytes())
         .userId(userId)
         .build();
   }
@@ -35,11 +41,12 @@ public class FileMapper {
     return FileResponse.builder()
         .id(file.getId())
         .name(file.getName())
-        .extention(file.getExtention())
+        .extension(file.getExtension())
         .created(file.getCreated())
         .modified(file.getModified())
         .deleted(file.getDeleted())
-        .isActive(file.isActive()).build();
+        .isActive(file.isActive())
+        .data(file.getData()).build();
   }
 
   public List<FileResponse> mapToDtoList(List<File> files) {
