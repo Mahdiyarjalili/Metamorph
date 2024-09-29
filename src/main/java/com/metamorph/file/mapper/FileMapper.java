@@ -24,7 +24,7 @@ public class FileMapper {
       throws IOException {
 
     return File.builder()
-        .name(file.getName())
+        .name(file.getOriginalFilename())
         .type(type)
         .extension(extension)
         .created(LocalDate.now())
