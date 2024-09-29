@@ -1,4 +1,4 @@
-package com.metamorph.file.dto;
+package com.metamorph.domains.file.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

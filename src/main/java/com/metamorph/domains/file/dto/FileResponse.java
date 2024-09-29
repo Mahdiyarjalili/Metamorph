@@ -1,4 +1,4 @@
-package com.metamorph.file.dto;
+package com.metamorph.domains.file.dto;
 
 import java.time.LocalDate;
 import lombok.Builder;
