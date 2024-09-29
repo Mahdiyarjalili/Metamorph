@@ -1,4 +1,4 @@
-package com.metamorph.file.model;
+package com.metamorph.domains.file.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;

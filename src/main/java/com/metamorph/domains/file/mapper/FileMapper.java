@@ -1,9 +1,9 @@
-package com.metamorph.file.mapper;
+package com.metamorph.domains.file.mapper;
 
-import com.metamorph.file.dto.FileCreateRequest;
-import com.metamorph.file.dto.FileResponse;
-import com.metamorph.file.model.File;
-import com.metamorph.file.repository.FileRepository;
+import com.metamorph.domains.file.dto.FileResponse;
+import com.metamorph.domains.file.model.File;
+import com.metamorph.domains.file.repository.FileRepository;
+import com.metamorph.domains.file.dto.FileCreateRequest;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

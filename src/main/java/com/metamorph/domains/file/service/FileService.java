@@ -1,4 +1,4 @@
-package com.metamorph.file.service;
+package com.metamorph.domains.file.service;
 
 import java.util.HashMap;
 import java.util.Map;

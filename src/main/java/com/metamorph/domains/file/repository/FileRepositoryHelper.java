@@ -1,6 +1,6 @@
-package com.metamorph.file.repository;
+package com.metamorph.domains.file.repository;
 
-import com.metamorph.file.model.File;
+import com.metamorph.domains.file.model.File;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
