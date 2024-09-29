@@ -1,19 +1,18 @@
 package com.metamorph.features.htmltopdf.controller;
 
 import com.metamorph.features.htmltopdf.service.HtmlToPdfService;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/convert")
+@RequestMapping("/api/files")
 @RequiredArgsConstructor
 public class HtmlToPdfController {
 
   private final HtmlToPdfService htmlToPdfService;
 
-  @PostMapping(params = "html-to-pdf")
+  @PostMapping(value = "/convert", params = "action=html-to-pdf")
   public ResponseEntity<byte[]> convertHtmlToPdf(@RequestBody String htmlContent)
       throws Exception {
 
