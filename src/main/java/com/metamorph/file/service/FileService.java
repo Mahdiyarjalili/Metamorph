@@ -1,5 +1,7 @@
 package com.metamorph.file.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import com.metamorph.file.dto.FileResponse;
 import com.metamorph.file.mapper.FileMapper;
@@ -24,7 +26,6 @@ public class FileService {
   public String addFile(MultipartFile file,String type,Jwt jwt) {
     String userId = jwt.getSubject();
     String fileExtension = getFileExtension(file);
-
     try {
       fileRepository.save(fileMapper.mapToEntity(file,type,fileExtension, userId));
     } catch (IOException e) {
@@ -41,12 +42,17 @@ public class FileService {
     return fileMapper.mapToDtoList(files);
   }
 
-  public FileResponse getFile(Long fileId, Jwt jwt) {
+  public Map<String, Object> getFile(Long fileId, Jwt jwt) {
 
     String userId = jwt.getSubject();
+    Map<String, Object> fileData = new HashMap<>();
     File file = fileRepositoryHelper.getFile(fileId, userId);
+    fileData.put("name",file.getName());
+    fileData.put("length",file.getData().length);
+    fileData.put("data",file.getData());
 
-    return fileMapper.mapToDto(file);
+
+    return fileData;
   }
 
   public String deleteFile(Long fileId, Jwt jwt) {

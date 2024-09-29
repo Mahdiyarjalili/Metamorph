@@ -9,8 +9,10 @@ import com.metamorph.util.LogMessages;
 import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,7 @@ public class FileController {
       @RequestParam("file") MultipartFile file,
       @RequestParam("type") String type) {
 
-    String response = fileService.addFile(file,type, jwt);
+    String response = fileService.addFile(file, type, jwt);
     log.info(LogMessages.ENTITY_CREATED, "File", response);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -50,23 +52,32 @@ public class FileController {
   }
 
   @GetMapping("/{fileId}")
-  public ResponseEntity<FileResponse> getFile(@PathVariable Long fileId,
+  public ResponseEntity<ByteArrayResource> getFile(@PathVariable Long fileId,
       @AuthenticationPrincipal Jwt jwt) {
 
-    FileResponse file = fileService.getFile(fileId, jwt);
+    Map<String, Object> fileData = fileService.getFile(fileId, jwt);
     log.info(LogMessages.ENTITY_FOUND, "File", fileId);
+    byte[] fileBytes = (byte[]) fileData.get("data");  // Hole das byte[] aus den Dateidaten
+    ByteArrayResource resource = new ByteArrayResource(fileBytes);
+    String fileName = fileData.get("name").toString();
+    int length = (int) fileData.get("length");
 
-    return ResponseEntity.status(HttpStatus.OK).body(file);
+
+    return ResponseEntity.status(HttpStatus.OK)
+        .contentLength(length)
+        .header("Content-type", "application/octet-stream")
+        .header("Content-disposition", "attachment; filename=\"" + fileName + "\"")
+        .body(resource);
   }
 
-  @DeleteMapping("/{fileId}")
+ /* @DeleteMapping("/{fileId}")
   public ResponseEntity<FileResponse> deleteFile(@PathVariable Long fileId,
       @AuthenticationPrincipal Jwt jwt) {
 
-    FileResponse file = fileService.getFile(fileId, jwt);
+    //FileResponse file = fileService.getFile(fileId, jwt);
     log.info(LogMessages.ENTITY_FOUND, "File", fileId);
 
     return ResponseEntity.status(HttpStatus.OK).body(file);
   }
-
+*/
 }
