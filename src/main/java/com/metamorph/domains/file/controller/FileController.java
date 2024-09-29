@@ -1,13 +1,9 @@
-package com.metamorph.file.controller;
+package com.metamorph.domains.file.controller;
 
-import static org.springframework.http.MediaType.*;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-import com.metamorph.file.dto.FileCreateRequest;
-import com.metamorph.file.dto.FileResponse;
-import com.metamorph.file.service.FileService;
+import com.metamorph.domains.file.dto.FileResponse;
+import com.metamorph.domains.file.service.FileService;
 import com.metamorph.util.LogMessages;
-import jakarta.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import lombok.*;
@@ -62,7 +58,6 @@ public class FileController {
     String fileName = fileData.get("name").toString();
     int length = (int) fileData.get("length");
 
-
     return ResponseEntity.status(HttpStatus.OK)
         .contentLength(length)
         .header("Content-type", "application/octet-stream")
@@ -70,14 +65,4 @@ public class FileController {
         .body(resource);
   }
 
- /* @DeleteMapping("/{fileId}")
-  public ResponseEntity<FileResponse> deleteFile(@PathVariable Long fileId,
-      @AuthenticationPrincipal Jwt jwt) {
-
-    //FileResponse file = fileService.getFile(fileId, jwt);
-    log.info(LogMessages.ENTITY_FOUND, "File", fileId);
-
-    return ResponseEntity.status(HttpStatus.OK).body(file);
-  }
-*/
 }

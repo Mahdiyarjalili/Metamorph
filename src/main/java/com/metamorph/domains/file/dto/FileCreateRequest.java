@@ -14,8 +14,8 @@ public class FileCreateRequest {
   @NotBlank(message = "Type is required and can not be blank.")
   private String type;
 
-  @NotBlank(message = "Extention is required and can not be blank.")
-  private String extention;
+  @NotBlank(message = "Extension is required and can not be blank.")
+  private String extension;
 
   @NotBlank(message = "Created date is required and can not be blank.")
   private LocalDateTime created;
