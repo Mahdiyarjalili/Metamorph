@@ -21,17 +21,18 @@ public class HtmlToImageController {
   private final HtmlToPdfService htmlToPdfService;
 
   @PostMapping(value = "/convert", params = "action=html-to-image")
-  public ResponseEntity<byte[]> convertHtmlToImage (@RequestBody String htmlContent, @AuthenticationPrincipal Jwt jwt)
+  public ResponseEntity<byte[]> convertHtmlToImage(@RequestBody String htmlContent,
+      @AuthenticationPrincipal Jwt jwt)
       throws Exception {
 
     File file = htmlToPdfService.convertHtmlToPdf(htmlContent, jwt);
-    byte[] image = htmlToImageService.convertHtmlToImage(file);
-    System.out.println("image bytes: " + image.toString());
+    File imageFile = htmlToImageService.convertPdfToImage(file);
+    byte[] imageFileBytes = htmlToPdfService.getBytes(imageFile);
     HttpHeaders headers = new HttpHeaders();
-    headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=html-to-image");
+    headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=html-to-image");
     headers.setContentType(MediaType.IMAGE_PNG);
 
-    return new ResponseEntity<>(image,headers, HttpStatus.OK);
+    return new ResponseEntity<>(imageFileBytes, headers, HttpStatus.OK);
   }
 
 }

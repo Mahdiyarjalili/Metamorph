@@ -83,13 +83,5 @@ public class HtmlToPdfService {
       return page.getMediaBox().getWidth() * POINTS_TO_MM;
     }
   }
-
-  private float getPdfPageHeigth(File pdfFile) throws IOException {
-    try (PDDocument document = PDDocument.load(pdfFile)) {
-      PDPage page = document.getPage(0);
-
-      return page.getMediaBox().getHeight() * POINTS_TO_MM;
-    }
-  }
 }
 
