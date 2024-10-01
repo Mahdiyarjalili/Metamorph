@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import com.metamorph.domains.file.dto.FileResponse;
 import com.metamorph.domains.file.mapper.FileMapper;
-import com.metamorph.domains.file.model.File;
+import com.metamorph.domains.file.model.UserFile;
 import com.metamorph.domains.file.repository.FileRepository;
 import com.metamorph.domains.file.repository.FileRepositoryHelper;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class FileService {
   public List<FileResponse> getAllFiles(boolean isActive, Jwt jwt) {
 
     String userId = jwt.getSubject();
-    List<File> files = fileRepositoryHelper.getAll(isActive, userId);
+    List<UserFile> files = fileRepositoryHelper.getAll(isActive, userId);
 
     return fileMapper.mapToDtoList(files);
   }
@@ -46,7 +46,7 @@ public class FileService {
 
     String userId = jwt.getSubject();
     Map<String, Object> fileData = new HashMap<>();
-    File file = fileRepositoryHelper.getFile(fileId, userId);
+    UserFile file = fileRepositoryHelper.getFile(fileId, userId);
     fileData.put("name",file.getName());
     fileData.put("length",file.getData().length);
     fileData.put("data",file.getData());
@@ -58,7 +58,7 @@ public class FileService {
   public String deleteFile(Long fileId, Jwt jwt) {
 
     String userId = jwt.getSubject();
-    File file = fileRepositoryHelper.getFile(fileId, userId);
+    UserFile file = fileRepositoryHelper.getFile(fileId, userId);
     fileRepository.delete(file);
 
     return "File deleted successfully";
