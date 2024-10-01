@@ -1,6 +1,6 @@
-package com.metamorph.domains.file.repository;
+package com.metamorph.domains.importedfile.repository;
 
-import com.metamorph.domains.file.model.File;
+import com.metamorph.domains.importedfile.model.UserFile;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,9 @@ public class FileRepositoryHelper {
    * @return the list of files
    * @throws EntityNotFoundException if the files are not found
    */
-  public List<File> getAll(boolean isActive, String userId) {
+  public List<UserFile> getAll(boolean isActive, String userId) {
 
-    List<File> files = fileRepository.findAllFiles(isActive, userId);
+    List<UserFile> files = fileRepository.findAllFiles(isActive, userId);
     if (files == null || files.isEmpty()) {
       throw new EntityNotFoundException("No File found");
     }
@@ -38,9 +38,9 @@ public class FileRepositoryHelper {
    * @return the file
    * @throws EntityNotFoundException if the file is not found
    */
-  public File getFile(Long fileId, String userId) {
+  public UserFile getFile(Long fileId, String userId) {
 
-    File file = fileRepository.findById(fileId, userId)
+    UserFile file = fileRepository.findById(fileId, userId)
         .orElseThrow(() -> new EntityNotFoundException("No File found with id: " + fileId));
 
     return file;

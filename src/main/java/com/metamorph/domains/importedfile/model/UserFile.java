@@ -1,5 +1,6 @@
-package com.metamorph.domains.file.model;
+package com.metamorph.domains.importedfile.model;
 
+import com.metamorph.domains.importedfile.enums.FileType;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.*;
@@ -10,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class File {
+public class UserFile {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +20,18 @@ public class File {
   @Column(name = "file_name", nullable = false)
   private String name;
 
-  @Column(name = "file_type", nullable = false)
-  private String type;
+  @Column(name = "file_category", nullable = false)
+  private String category;
 
   @Column(name = "file_extension", nullable = false)
   private String extension;
 
   @Column(name = "created_date", nullable = false)
   private LocalDate created;
+
+  @Column(name = "file_type", nullable = false)
+  @Enumerated(EnumType.STRING)
+  private FileType type;
 
   @Column(name = "modified_date")
   private LocalDate modified;

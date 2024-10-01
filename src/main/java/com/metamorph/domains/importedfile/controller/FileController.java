@@ -1,8 +1,8 @@
-package com.metamorph.domains.file.controller;
+package com.metamorph.domains.importedfile.controller;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-import com.metamorph.domains.file.dto.FileResponse;
-import com.metamorph.domains.file.service.FileService;
+import com.metamorph.domains.importedfile.dto.FileResponse;
+import com.metamorph.domains.importedfile.service.FileService;
 import com.metamorph.util.LogMessages;
 import java.util.List;
 import java.util.Map;

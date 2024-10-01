@@ -1,29 +1,28 @@
-package com.metamorph.domains.file.mapper;
+package com.metamorph.domains.importedfile.mapper;
 
-import com.metamorph.domains.file.dto.FileResponse;
-import com.metamorph.domains.file.model.File;
-import com.metamorph.domains.file.repository.FileRepository;
+import com.metamorph.domains.importedfile.dto.FileResponse;
+import com.metamorph.domains.importedfile.enums.FileType;
+import com.metamorph.domains.importedfile.model.UserFile;
+import com.metamorph.domains.importedfile.repository.FileRepository;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
+@RequiredArgsConstructor
 public class FileMapper {
 
   private final FileRepository fileRepository;
 
-  public FileMapper(FileRepository fileRepository) {
-    this.fileRepository = fileRepository;
-  }
-
-  public File mapToEntity(MultipartFile file,String type, String extension, String userId)
+  public UserFile mapToEntity(MultipartFile file,String type, String extension, String userId)
       throws IOException {
 
-    return File.builder()
+    return UserFile.builder()
         .name(file.getOriginalFilename())
-        .type(type)
+        .type(FileType.valueOf(type))
         .extension(extension)
         .created(LocalDate.now())
         .modified(null)
@@ -34,7 +33,7 @@ public class FileMapper {
         .build();
   }
 
-  public FileResponse mapToDto(File file) {
+  public FileResponse mapToDto(UserFile file) {
 
     return FileResponse.builder()
         .id(file.getId())
@@ -47,7 +46,7 @@ public class FileMapper {
         .data(file.getData()).build();
   }
 
-  public List<FileResponse> mapToDtoList(List<File> files) {
+  public List<FileResponse> mapToDtoList(List<UserFile> files) {
 
     return files.stream().map(this::mapToDto).toList();
   }
