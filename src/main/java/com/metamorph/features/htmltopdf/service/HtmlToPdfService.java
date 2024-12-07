@@ -5,8 +5,11 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Page.PdfOptions;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.Margin;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -26,13 +29,14 @@ public class HtmlToPdfService {
   }
 
 
-  public File convertHtmlToPdf(String htmlContent, Jwt jwt) throws Exception {
+  public File convertHtmlToPdf(File inputHtmlFile, Jwt jwt) throws Exception {
 
+    String inputHtmlContent = getHtmlContentFromFile(inputHtmlFile);
 
     try (Playwright playwright = Playwright.create()) {
       Browser browser = playwright.chromium().launch();
       Page page = browser.newPage();
-      page.setContent(htmlContent);
+      page.setContent(inputHtmlContent);
 
       PdfOptions pdfOptions = new PdfOptions()
           .setMargin(new Margin() // Ränder anpassen
@@ -82,6 +86,11 @@ public class HtmlToPdfService {
       PDPage page = document.getPage(0);
       return page.getMediaBox().getWidth() * POINTS_TO_MM;
     }
+  }
+
+  private String getHtmlContentFromFile(File inputHtmlFile) throws IOException {
+
+    return Files.readString(inputHtmlFile.toPath());
   }
 }
 
