@@ -1,6 +1,6 @@
 package com.metamorph.domains.file.model;
 
-import com.metamorph.domains.file.enums.FileType;
+import com.metamorph.domains.file.enums.UserFileType;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.*;
@@ -25,7 +25,7 @@ public class UserFile {
 
   @Column(name = "file_type", nullable = false)
   @Enumerated(EnumType.STRING)
-  private FileType type;
+  private UserFileType type;
 
   @Column(name = "file_extension", nullable = false)
   private String extension;

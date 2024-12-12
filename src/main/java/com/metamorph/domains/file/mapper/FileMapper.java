@@ -1,10 +1,12 @@
 package com.metamorph.domains.file.mapper;
 
 import com.metamorph.domains.file.dto.FileResponse;
-import com.metamorph.domains.file.enums.FileType;
+import com.metamorph.domains.file.enums.UserFileType;
 import com.metamorph.domains.file.model.UserFile;
 import com.metamorph.domains.file.repository.FileRepository;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,18 +19,18 @@ public class FileMapper {
 
   private final FileRepository fileRepository;
 
-  public UserFile mapToEntity(MultipartFile file,String type, String extension, String userId)
+  public UserFile mapToEntity(File file,UserFileType type, String extension, String userId)
       throws IOException {
 
     return UserFile.builder()
-        .name(file.getOriginalFilename())
-        .type(FileType.valueOf(type))
+        .name(file.getName())
+        .type(type)
         .extension(extension)
         .created(LocalDate.now())
         .modified(null)
         .deleted(null)
         .isActive(true)
-        .data(file.getBytes())
+        .data(Files.readAllBytes(file.toPath()))
         .userId(userId)
         .build();
   }
