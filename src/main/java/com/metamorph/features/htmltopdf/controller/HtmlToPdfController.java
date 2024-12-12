@@ -18,12 +18,12 @@ public class HtmlToPdfController {
   public ResponseEntity<byte[]> convertHtmlToPdf(@RequestBody String htmlContent,@AuthenticationPrincipal Jwt jwt)
       throws Exception {
 
-    byte[] pdfBytes = htmlToPdfService.getBytes(htmlToPdfService.convertHtmlToPdf(htmlContent, jwt));
+    //byte[] pdfBytes = htmlToPdfService.getBytes(htmlToPdfService.convertHtmlToPdf(htmlContent, jwt));
     HttpHeaders headers = new HttpHeaders();
     headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=document.pdf");
     headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
 
-    return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    return new ResponseEntity<>(null, headers, HttpStatus.OK);
 
   }
 }

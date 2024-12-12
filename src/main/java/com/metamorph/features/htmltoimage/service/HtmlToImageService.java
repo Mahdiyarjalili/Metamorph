@@ -8,13 +8,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.*;
 
 @Service
 public class HtmlToImageService {
 
+  @KafkaListener(topics = "html-converting-to-Pdf-started", groupId = "group-id",autoStartup = "false")
+  public void listen(String message) {
+    System.out.println("Received: " + message);
+  }
   public File convertPdfToImage(File file) throws Exception {
-
+    System.out.println("Received generated pdf for converting to image");
     PDDocument document = PDDocument.load(file);
     PDFRenderer renderer = new PDFRenderer(document);
     int pageCount = document.getNumberOfPages();
