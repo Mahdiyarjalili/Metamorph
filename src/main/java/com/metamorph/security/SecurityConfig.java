@@ -50,7 +50,7 @@ public class SecurityConfig {
             .permitAll()
             .requestMatchers("/auth/**").permitAll()
             .requestMatchers("/h2/**").permitAll()
-            .anyRequest().authenticated());
+            .anyRequest().permitAll());
     http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     http.oauth2ResourceServer(
         oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtOuthConverter)));

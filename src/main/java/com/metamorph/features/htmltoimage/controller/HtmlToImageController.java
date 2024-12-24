@@ -44,5 +44,11 @@ public class HtmlToImageController {
 
     return new ResponseEntity<>(imageFileBytes, headers, HttpStatus.OK);
   }
+  @GetMapping("/test")
+  public ResponseEntity<String> printme()
+  {
+    System.out.println("Hi Axios my best Friend!");
+    return ResponseEntity.status(HttpStatus.OK).body("Hi Axios my best Friend! in Json");
+  }
 
 }
