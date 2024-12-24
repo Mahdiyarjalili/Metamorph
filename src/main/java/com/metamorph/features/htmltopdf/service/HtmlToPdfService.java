@@ -1,5 +1,7 @@
 package com.metamorph.features.htmltopdf.service;
 
+import com.metamorph.domains.file.enums.UserFileType;
+import com.metamorph.domains.file.service.UserFileService;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Page.PdfOptions;
@@ -8,6 +10,7 @@ import com.microsoft.playwright.options.Margin;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +19,19 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class HtmlToPdfService {
 
   private static final float POINTS_TO_MM = 0.3528f;
   private static final int A4_HEIGHT_MM = 297;
+  private  final UserFileService userFileService;
 
-  private final KafkaTemplate<String, String> kafkaTemp;
+  /*private final KafkaTemplate<String, String> kafkaTemp;
 
   public HtmlToPdfService(KafkaTemplate<String, String> kafkaTemplate) {
+
     this.kafkaTemp = kafkaTemplate;
-  }
+  }*/
 
   public byte[] getBytes(File file) throws Exception {
 
@@ -36,7 +42,7 @@ public class HtmlToPdfService {
 
   public File convertHtmlToPdf(File inputHtmlFile, Jwt jwt) throws Exception {
     String message = "HTML to PDF conversion started for file: " + inputHtmlFile.getAbsolutePath();
-    kafkaTemp.send("html-converting-to-Pdf-started", message);
+    //kafkaTemp.send("html-converting-to-Pdf-started", message);
     String inputHtmlContent = getHtmlContentFromFile(inputHtmlFile);
 
     try (Playwright playwright = Playwright.create()) {
@@ -63,9 +69,8 @@ public class HtmlToPdfService {
 
       primitvePdfFile.delete();
       browser.close();
-
+      userFileService.addFile(finalPdfFile, UserFileType.EXPORTED,jwt);
       return finalPdfFile;
-
     }
   }
 
