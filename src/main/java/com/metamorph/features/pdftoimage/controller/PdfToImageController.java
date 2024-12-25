@@ -27,7 +27,7 @@ public class PdfToImageController {
   @PostMapping(value = "/convert", params = "action=pdf-to-image")
   public ResponseEntity<byte[]> convertPdfToImage(@RequestParam MultipartFile file,@AuthenticationPrincipal Jwt jwt)
       throws Exception {
-    byte[] imageFileBytes = htmlToPdfService.getBytes(pdfToImageService.convertPdfToImage(file));
+    byte[] imageFileBytes = htmlToPdfService.getBytes(pdfToImageService.convertPdfToImage(file,jwt));
     HttpHeaders headers = new HttpHeaders();
     headers.set(HttpHeaders.CONTENT_DISPOSITION,
         "attachment; filename=" + file.getOriginalFilename());

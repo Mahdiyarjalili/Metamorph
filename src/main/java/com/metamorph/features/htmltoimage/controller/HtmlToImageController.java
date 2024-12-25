@@ -33,8 +33,7 @@ public class HtmlToImageController {
     File inputFile = new File(file.getOriginalFilename());
     file.transferTo(inputFile);
     File outputPdfFile = htmlToPdfService.convertHtmlToPdf(inputFile, jwt);
-    File imageFile = htmlToImageService.convertPdfToImage(outputPdfFile);
-    userFileService.addFile(imageFile, UserFileType.EXPORTED,jwt);
+    File imageFile = htmlToImageService.convertPdfToImage(outputPdfFile,jwt);
     byte[] imageFileBytes = htmlToPdfService.getBytes(imageFile);
     String fileName = inputFile.getName();
     inputFile.delete();

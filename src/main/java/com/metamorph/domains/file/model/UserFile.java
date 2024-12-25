@@ -1,5 +1,7 @@
 package com.metamorph.domains.file.model;
 
+import com.metamorph.domains.file.enums.FileCategory;
+import com.metamorph.domains.file.enums.FileFunction;
 import com.metamorph.domains.file.enums.UserFileType;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -20,8 +22,13 @@ public class UserFile {
   @Column(name = "file_name", nullable = false)
   private String name;
 
-  @Column(name = "file_category", nullable = false)
-  private String category;
+  @Column(name = "file_category")
+  @Enumerated(EnumType.STRING)
+  private FileCategory fileCategory;
+
+  @Column(name = "file_function")
+  @Enumerated(EnumType.STRING)
+  private FileFunction fileFunction;
 
   @Column(name = "file_type", nullable = false)
   @Enumerated(EnumType.STRING)
@@ -33,7 +40,7 @@ public class UserFile {
   @Column(name = "created_date", nullable = false)
   private LocalDate created;
 
-    @Column(name = "modified_date")
+  @Column(name = "modified_date")
   private LocalDate modified;
 
   @Column(name = "deleted_date")

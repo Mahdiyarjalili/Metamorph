@@ -1,6 +1,8 @@
 package com.metamorph.domains.file.mapper;
 
 import com.metamorph.domains.file.dto.FileResponse;
+import com.metamorph.domains.file.enums.FileCategory;
+import com.metamorph.domains.file.enums.FileFunction;
 import com.metamorph.domains.file.enums.UserFileType;
 import com.metamorph.domains.file.model.UserFile;
 import com.metamorph.domains.file.repository.FileRepository;
@@ -11,7 +13,6 @@ import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 @Component
 @RequiredArgsConstructor
@@ -19,11 +20,14 @@ public class FileMapper {
 
   private final FileRepository fileRepository;
 
-  public UserFile mapToEntity(File file,UserFileType type, String extension, String userId)
+  public UserFile mapToEntity(File file, FileCategory fileCategory, FileFunction fileFunction, UserFileType type, String extension,
+      String userId)
       throws IOException {
 
     return UserFile.builder()
         .name(file.getName())
+        .fileCategory(fileCategory)
+        .fileFunction(fileFunction)
         .type(type)
         .extension(extension)
         .created(LocalDate.now())

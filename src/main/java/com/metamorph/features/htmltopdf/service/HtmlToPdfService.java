@@ -1,5 +1,7 @@
 package com.metamorph.features.htmltopdf.service;
 
+import com.metamorph.domains.file.enums.FileCategory;
+import com.metamorph.domains.file.enums.FileFunction;
 import com.metamorph.domains.file.enums.UserFileType;
 import com.metamorph.domains.file.service.UserFileService;
 import com.microsoft.playwright.Browser;
@@ -13,8 +15,6 @@ import java.nio.file.Files;
 import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class HtmlToPdfService {
 
   private static final float POINTS_TO_MM = 0.3528f;
   private static final int A4_HEIGHT_MM = 297;
-  private  final UserFileService userFileService;
+  private final UserFileService userFileService;
 
   /*private final KafkaTemplate<String, String> kafkaTemp;
 
@@ -69,7 +69,7 @@ public class HtmlToPdfService {
 
       primitvePdfFile.delete();
       browser.close();
-      userFileService.addFile(finalPdfFile, UserFileType.EXPORTED,jwt);
+      userFileService.addFile(finalPdfFile, FileCategory.DOCUMENT, FileFunction.HTMLTOPDF, UserFileType.EXPORTED, jwt);
       return finalPdfFile;
     }
   }

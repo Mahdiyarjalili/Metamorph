@@ -1,6 +1,8 @@
 package com.metamorph.domains.file.service;
 
 import com.metamorph.domains.file.dto.FileResponse;
+import com.metamorph.domains.file.enums.FileCategory;
+import com.metamorph.domains.file.enums.FileFunction;
 import com.metamorph.domains.file.enums.UserFileType;
 import com.metamorph.domains.file.mapper.FileMapper;
 import com.metamorph.domains.file.model.UserFile;
@@ -26,11 +28,11 @@ public class UserFileService {
   private final FileMapper fileMapper;
   private final FileRepositoryHelper fileRepositoryHelper;
 
-  public String addFile(File file, UserFileType type, Jwt jwt) throws Exception {
+  public String addFile(File file, FileCategory fileCategory, FileFunction fileFunction, UserFileType fileType, Jwt jwt) throws Exception {
     String userId = jwt.getSubject();
     String fileExtension = getFileExtension(file);
 
-    fileRepository.save(fileMapper.mapToEntity(file, type, fileExtension, userId));
+    fileRepository.save(fileMapper.mapToEntity(file, fileCategory, fileFunction, fileType, fileExtension, userId));
 
     return "File created successfully";
   }
