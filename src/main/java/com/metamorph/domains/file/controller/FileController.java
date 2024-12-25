@@ -31,10 +31,11 @@ public class FileController {
   @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},
       produces = APPLICATION_JSON_VALUE)
   public ResponseEntity<String> createFile(@AuthenticationPrincipal Jwt jwt,
-      @RequestParam("file") MultipartFile file) throws Exception {
-    File importedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
-    file.transferTo(importedFile);
-    String response = userFileService.addFile(importedFile, UserFileType.IMPORTED, jwt);
+      @RequestParam("file") MultipartFile multipartFile) throws Exception {
+    //File importedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
+    //file.transferTo(importedFile);
+    File importedFile = userFileService.convertMultipartFileToFile(multipartFile);
+    String response = userFileService.addFile(importedFile, null,null, UserFileType.IMPORTED, jwt);
     importedFile.delete();
     log.info(LogMessages.ENTITY_CREATED, "File", response);
 

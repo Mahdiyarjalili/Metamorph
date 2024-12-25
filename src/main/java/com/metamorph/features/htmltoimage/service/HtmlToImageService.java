@@ -1,24 +1,32 @@
 package com.metamorph.features.htmltoimage.service;
 
+import com.metamorph.domains.file.enums.FileCategory;
+import com.metamorph.domains.file.enums.FileFunction;
+import com.metamorph.domains.file.enums.UserFileType;
+import com.metamorph.domains.file.service.UserFileService;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import javax.imageio.ImageIO;
+import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.*;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class HtmlToImageService {
 
-  @KafkaListener(topics = "html-converting-to-Pdf-started", groupId = "group-id",autoStartup = "false")
+  private final UserFileService userFileService;
+
+  @KafkaListener(topics = "html-converting-to-Pdf-started", groupId = "group-id", autoStartup = "false")
   public void listen(String message) {
     System.out.println("Received: " + message);
   }
-  public File convertPdfToImage(File file) throws Exception {
+
+  public File convertPdfToImage(File file, Jwt jwt) throws Exception {
     System.out.println("Received generated pdf for converting to image");
     PDDocument document = PDDocument.load(file);
     PDFRenderer renderer = new PDFRenderer(document);
@@ -45,6 +53,7 @@ public class HtmlToImageService {
 
     File outputImageFile = new File("output.png");
     ImageIO.write(combinedImage, "png", outputImageFile);
+    userFileService.addFile(outputImageFile, FileCategory.IMAGE, FileFunction.PDFTOIMAGE, UserFileType.EXPORTED, jwt);
 
     document.close();
 
